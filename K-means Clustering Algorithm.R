@@ -39,7 +39,7 @@ inTrain <- createDataPartition(y=iris$Species, p = 0.7, list =F)
 # createDataPartition()함수는 훈련 및 테스트 데이터로 분할하는 함수로 Species 데이터 기준으로 70%를 가져간다 
 training <- iris[inTrain,] # 훈련 데이터 
 testing <- iris[inTrain,] # 평가 데이터 
-training.data <- scale(training[-5]) # scale()을 사용하여 표준 정규화를 해서 단위의 영향을 없앤다
+training.data <- scale(training[-5]) # scale()을 사용하여 표준 정규화를 해서 단위의 영향을 없앤다 ( 각 feature의 단위를 무시하여 같은 기준으로 비교할 수 있게 만들어 준다 )
 # training[-5]로 5번째 열인 Species 범주형 변수를 삭제해서 표준화가 가능하게 하였다 
 View(training.data)
 iris.kmeans <- kmeans(training.data[,-5], center = 3, iter.max = 10000) # center는 초기군집 수(K), iter.max는 반복횟수를 의미한다 
