@@ -47,12 +47,3 @@ iris.kmeans$centers # 각 cluster의 중심값
 training$cluster <- as.factor(iris.kmeans$cluster) # as.factor()를 통해 iris.kmeans의 cluster 속성을 training 의 속성에 붙인다 
 qplot(Petal.Width, Petal.Length, color = cluster, data = training)
 table(training$Species, training$cluster) 
-
-# K-means Clustering 에서 군집중심개수를 결정하는 방법1 
-
-install.packages("NbClust")
-library(NbClust)
-nc <- NbClust(training.data, min.nc =2, max.nc = 15, method = "kmeans") # K는 2부터 15까지 
-# NbClust 패키지는 26개의 군집분석 알고리즘 중 최적 군집 개수를 알려준다 
-par(mfrow = c(1,1))
-barplot(table(nc$Best.n[1,]), xlab = "Number of Clusters", ylab = "Number of Criteria", main = "Number of Clusters Chosen") # 최적 군집 개수 판단 
