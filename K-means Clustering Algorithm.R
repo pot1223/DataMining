@@ -11,11 +11,11 @@ barplot(table(nc$Best.n[1,]), xlab = "Number of Clusters", ylab = "Number of Cri
 
 wssplot <- function(data, nc= 15, seed =1234) # nc로 최대 군집수, seed는 랜덤 난수 
   {
-    wss <- (nrow(data)-1)*sum(apply(data,2,var)) # 열의 분산 합
+    wss <- (nrow(data)-1)*sum(apply(data,2,var)) # 열의 분산 합 (apply(data, margin, function)으로 margin 값이 2이기 때문에 열기준으로 분산값을 계산한 뒤 sum()으로 합한다)
     for(i in 2:nc)
       {
         set.seed(seed)
-        wss[i] <- sum(kmeans(data, centers=i)$withinss)
+        wss[i] <- sum(kmeans(data, centers=i)$withinss) # wss의 2번째 요소는 K=2일때의 총 오차  제곱합, 3번째 요소는 K=3일때의 총 오차 제곱합,... 이 된다 
       }
     plot(1:nc, wss, type='b',xlab = "Number of Clusters", ylab = "Within groups sum of squares")
   }
